@@ -9,7 +9,7 @@ public class RaisingPlatform : MonoBehaviour
     [SerializeField] Material desiredMat;
     [Tooltip("The material the platform is when the player is not near")]
     [SerializeField] Material startingMat;
-    [Tooltip("The platform that s being moved")]
+    [Tooltip("The platform that is being moved")]
     [SerializeField] GameObject platform;
     [Tooltip("The lowest point of the platform")]
     [SerializeField] float startingHeight;

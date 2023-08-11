@@ -5,17 +5,27 @@ using UnityEngine;
 
 public class PlayerHoldDrop : MonoBehaviour
 {
-    [SerializeField] float areaSize, grabPower, mouseRotationSpeed;
+    [Header("Player Hold Settings")]
+    [Tooltip("The size of the area that the play can hold things")]
+    [SerializeField] float areaSize;
+    [Tooltip("How fast the object will be grabbed")]
+    [SerializeField] float grabPower;
+    [Tooltip("Mouse sensetivity with rotation and levitation")]
+    [SerializeField] float mouseRotationSpeed;
+    [Tooltip("Holdable area position")]
     [SerializeField] Vector3 offset;
+    [Tooltip("Thing the player can hold")]
     [SerializeField] LayerMask holdableObjects;
+    [Tooltip("The position the holdable will be when held")]
     [SerializeField] Transform holdingPosition;
+    [Tooltip("The camera attached to the player")]
     [SerializeField] GameObject cam;
 
-    float yAxisSpeed, xAxisSpeed, clampedY;
-    bool holdingObject;
-    public Vector3 constantHoldingPosition;
-    GameObject currentHoldable;
-    Rigidbody currentHoldableRB;
+    private float yAxisSpeed, xAxisSpeed, clampedY;
+    private bool holdingObject;
+    private Vector3 constantHoldingPosition;
+    public GameObject currentHoldable;
+    private Rigidbody currentHoldableRB;
 
     private void OnDrawGizmosSelected()
     {
@@ -60,6 +70,7 @@ public class PlayerHoldDrop : MonoBehaviour
         {
             if (holdingObject && grabbingArea)
             {
+                currentHoldableRB.angularVelocity = new Vector3(0,0,0);
                 var position = (holdingPosition.position - currentHoldable.transform.position) * grabPower;
                 currentHoldableRB.velocity = position;
 
@@ -87,8 +98,8 @@ public class PlayerHoldDrop : MonoBehaviour
     {
         float XaxisRotation = Input.GetAxis("Mouse X") * mouseRotationSpeed;
         float YaxisRotation = Input.GetAxis("Mouse Y") * mouseRotationSpeed;
-        currentHoldable.transform.Rotate(Vector3.down, YaxisRotation);
-        currentHoldable.transform.Rotate(Vector3.right, XaxisRotation);
+        currentHoldable.transform.Rotate(transform.up, XaxisRotation, Space.World);
+        currentHoldable.transform.Rotate(transform.right, YaxisRotation, Space.World);
         cam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = 0f;
         cam.GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = 0f;
     }
