@@ -11,7 +11,7 @@ public class PlayerHoldDrop : MonoBehaviour
     [SerializeField] Transform holdingPosition;
     [SerializeField] GameObject cam;
 
-    float yAxisSpeed, xAxisSpeed;
+    float yAxisSpeed, xAxisSpeed, clampedY;
     bool holdingObject;
     public Vector3 constantHoldingPosition;
     GameObject currentHoldable;
@@ -27,13 +27,15 @@ public class PlayerHoldDrop : MonoBehaviour
     {
         yAxisSpeed = cam.GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed;
         xAxisSpeed = cam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed;
-        constantHoldingPosition = holdingPosition.position;
+        constantHoldingPosition = holdingPosition.localPosition;
     }
 
     private void Update()
     {
         var grabbingArea = Physics.CheckSphere(transform.position + transform.TransformDirection(offset), areaSize, holdableObjects);
         var grabbingCollider = Physics.OverlapSphere(transform.position + transform.TransformDirection(offset), areaSize, holdableObjects);
+        clampedY = Mathf.Clamp(holdingPosition.localPosition.y, 0, 2.25f);
+        holdingPosition.localPosition = new Vector3(holdingPosition.localPosition.x, clampedY, holdingPosition.localPosition.z);
 
         if (grabbingArea)
         {
@@ -62,28 +64,29 @@ public class PlayerHoldDrop : MonoBehaviour
                 currentHoldableRB.velocity = position;
 
                 if (Input.GetKey(KeyCode.Mouse0))
-                {
                     mouseRotation();
-                }
                 else if (Input.GetKey(KeyCode.Mouse1))
-                {
                     mouseUpDown();
-                }
                 else
-                    ResetToStartValue();
+                    FreeRotation();
             }
             else
-                ResetToStartValue();
+            {
+                FreeRotation();
+                FreeUpDown();
+            }
         }
         else
-            ResetToStartValue();
+        {
+            FreeRotation();
+            FreeUpDown();
+        }
     }
 
     private void mouseRotation()
     {
         float XaxisRotation = Input.GetAxis("Mouse X") * mouseRotationSpeed;
         float YaxisRotation = Input.GetAxis("Mouse Y") * mouseRotationSpeed;
-
         currentHoldable.transform.Rotate(Vector3.down, YaxisRotation);
         currentHoldable.transform.Rotate(Vector3.right, XaxisRotation);
         cam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = 0f;
@@ -92,18 +95,20 @@ public class PlayerHoldDrop : MonoBehaviour
 
     private void mouseUpDown()
     {
-        float XaxisRotation = Input.GetAxis("Mouse X") * mouseRotationSpeed;
-        float YaxisRotation = Input.GetAxis("Mouse Y") * mouseRotationSpeed;
-
-        holdingPosition.transform.Translate(Vector3.up * XaxisRotation);
+        float YaxisRotation = Input.GetAxis("Mouse Y") * mouseRotationSpeed / 25f;
+        holdingPosition.Translate(Vector3.up * YaxisRotation);
         cam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = 0f;
         cam.GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = 0f;
     }
 
-    private void ResetToStartValue()
+    private void FreeRotation()
     {
         cam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = xAxisSpeed;
         cam.GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = yAxisSpeed;
-        holdingPosition.position = constantHoldingPosition;
+    }
+
+    private void FreeUpDown()
+    {
+        holdingPosition.localPosition = constantHoldingPosition;
     }
 }
