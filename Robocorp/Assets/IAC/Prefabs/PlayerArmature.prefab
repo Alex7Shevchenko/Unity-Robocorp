@@ -1228,7 +1228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   areaSize: 1
-  grabPower: 10
+  grabPower: 25
   mouseRotationSpeed: 1
   offset: {x: 0, y: 1, z: 0.65}
   holdableObjects:
@@ -1236,6 +1236,7 @@ MonoBehaviour:
     m_Bits: 2304
   holdingPosition: {fileID: 3319054107771802090}
   cam: {fileID: 0}
+  currentHoldable: {fileID: 0}
 --- !u!1 &4523139366846529165
 GameObject:
   m_ObjectHideFlags: 0
