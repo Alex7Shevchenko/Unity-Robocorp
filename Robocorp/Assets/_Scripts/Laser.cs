@@ -94,7 +94,6 @@ public class Laser : MonoBehaviour
             if (hit.collider.tag == boxTag)
             {
                 isActivated = true;
-                print(boxTag);
             }
             else
             {

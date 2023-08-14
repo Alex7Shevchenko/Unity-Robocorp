@@ -6,14 +6,17 @@ public class PressurePlate : MonoBehaviour
     [SerializeField] GameObject plate;
     [SerializeField] string desiredObjectTag;
     [SerializeField] string[] triggerDetectionLayers;
-
-    [SerializeField] public bool isActivated;
     [SerializeField] List<GameObject> interactables;
 
+    [HideInInspector] public bool animationEnd = false;
+    [HideInInspector] public bool animationStart = false;
+
     LayerMask[] layers;
+    Animator animator;
 
     private void Awake()
     {
+        animator = gameObject.GetComponent<Animator>();
         layers = new LayerMask[triggerDetectionLayers.Length];
 
         for (int i = 0; i < triggerDetectionLayers.Length; i++)
@@ -22,22 +25,23 @@ public class PressurePlate : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        animator.Play("Off", 0, 1);
+    }
+
     private void Update()
     {
-        if (interactables.Count == 0)
+        if (interactables.Count == 0 && animationEnd == true)
         {
-            isActivated = false;
+            animator.Play("Off", 0);
         }
 
         foreach (GameObject interactable in interactables)
         {
-            if(interactable.tag == desiredObjectTag && interactables.Count > 0)
+            if (interactable.tag == desiredObjectTag && interactables.Count > 0 && animationStart == true)
             {
-                isActivated = true;
-            }
-            else
-            {
-                isActivated = false;
+                animator.Play("Active", 0);
             }
         }
     }

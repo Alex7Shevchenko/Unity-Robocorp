@@ -23,14 +23,19 @@ public class PlayerHoldDrop : MonoBehaviour
 
     private float yAxisSpeed, xAxisSpeed, clampedY;
     private bool holdingObject;
-    private Vector3 constantHoldingPosition;
-    public GameObject currentHoldable;
+    private Vector3 constantHoldingPosition, raycastStartPos;
+    private GameObject currentHoldable;
     private Rigidbody currentHoldableRB;
+    private RaycastHit hit;
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position + transform.TransformDirection(offset), areaSize);
+
+        Gizmos.color = Color.red;
+        if(currentHoldable != null)
+            Gizmos.DrawLine(raycastStartPos, hit.point);
     }
 
     private void Start()
@@ -42,6 +47,7 @@ public class PlayerHoldDrop : MonoBehaviour
 
     private void Update()
     {
+        raycastStartPos = new Vector3(transform.position.x, transform.position.y + offset.y + 0.65f, transform.position.z);
         var grabbingArea = Physics.CheckSphere(transform.position + transform.TransformDirection(offset), areaSize, holdableObjects);
         var grabbingCollider = Physics.OverlapSphere(transform.position + transform.TransformDirection(offset), areaSize, holdableObjects);
         clampedY = Mathf.Clamp(holdingPosition.localPosition.y, 0, 2.25f);
@@ -68,7 +74,11 @@ public class PlayerHoldDrop : MonoBehaviour
 
         if (currentHoldable != null)
         {
-            if (holdingObject && grabbingArea)
+            var direction = currentHoldable.transform.position - raycastStartPos;
+            var ray = new Ray(raycastStartPos, direction);
+            Physics.Raycast(ray, out hit);
+
+            if (holdingObject && grabbingArea && hit.collider.name == currentHoldable.name)
             {
                 currentHoldableRB.angularVelocity = new Vector3(0,0,0);
                 var position = (holdingPosition.position - currentHoldable.transform.position) * grabPower;

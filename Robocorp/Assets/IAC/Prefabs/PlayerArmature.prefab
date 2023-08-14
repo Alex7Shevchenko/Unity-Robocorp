@@ -1228,15 +1228,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   areaSize: 1
-  grabPower: 25
+  grabPower: 10
   mouseRotationSpeed: 1
   offset: {x: 0, y: 1, z: 0.65}
   holdableObjects:
     serializedVersion: 2
     m_Bits: 2304
   holdingPosition: {fileID: 3319054107771802090}
+  playerHeadPoint: {fileID: 2033188999}
   cam: {fileID: 0}
-  currentHoldable: {fileID: 0}
 --- !u!1 &4523139366846529165
 GameObject:
   m_ObjectHideFlags: 0

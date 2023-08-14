@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4928364547711574116}
   - component: {fileID: 919132149266819967}
+  - component: {fileID: 5161232979779557381}
   m_Layer: 0
   m_Name: Flipping_Platform
   m_TagString: Untagged
@@ -137,6 +138,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &5161232979779557381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5705710934321429214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aabae82dda7cde448144d3764d30395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activatorObject: {fileID: 0}
+  activatorAnimationName: 
+  animationToPlay: 
 --- !u!1 &5899777644680522509
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,8 +276,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6123666147149585861}
-  m_LocalRotation: {x: -0.00000026822084, y: -0, z: 0.70710653, w: 0.707107}
-  m_LocalPosition: {x: 0.002609253, y: 0, z: -0.002654553}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.2130812, y: 1.2130812, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
