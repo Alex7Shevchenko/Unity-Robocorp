@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 5128566984518417315}
   - component: {fileID: 244502844381118552}
   m_Layer: 8
-  m_Name: Cube_Heavy
+  m_Name: Cube_Red
   m_TagString: Red Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,7 +133,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6837530347904755277}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 2394dc523560fa14d83b5a40dc547980, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2

@@ -1,16 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
-using UnityEngine.Rendering.UI;
 
 public class Activator : MonoBehaviour
 {
+    [Header("How To Activate")]
+    [Space]
+    [SerializeField] bool activateByPressurePlate;
+    [SerializeField] bool activateByLaser;
+    [Header("Activator Settings")]
+    [Space]
     [SerializeField] GameObject activatorObject;
-    [SerializeField] string activatorAnimationName;
-    [SerializeField] string activeToPlay;
-    [SerializeField] string offToPlay;
-    [SerializeField] float delay;
+    [SerializeField] string activateAnimationName;
+    [SerializeField] string closeAnimationName;
+    [SerializeField] float animationStartDelay;
 
     [HideInInspector] public bool animationEnd = false;
     [HideInInspector] public bool animationStart = false;
@@ -18,6 +19,8 @@ public class Activator : MonoBehaviour
     private Animator animator;
     private Animator objectAnimator;
     private float timer;
+    private Laser laser;
+    private PressurePlate pressurePlate;
 
     private void Awake()
     {
@@ -27,30 +30,51 @@ public class Activator : MonoBehaviour
 
     private void Start()
     {
-        animator.Play(offToPlay, 0, 1);
+        animator.Play(closeAnimationName, 0, 1);
+
+        if (activateByPressurePlate)
+        {
+            activateByLaser = false;
+            pressurePlate = activatorObject.GetComponent<PressurePlate>();
+        }
+
+        if (activateByLaser)
+            laser = activatorObject.GetComponent<Laser>();
     }
 
     private void Update()
     {
-        if (objectAnimator.GetCurrentAnimatorStateInfo(0).IsName(activatorAnimationName) && animationStart == true)
-        {
-            Invoke(nameof(ActiveAnimation), delay);
-            print("In");
-        }
+        if (activateByPressurePlate)
+            ActivateByAnimation();
 
-        if (!objectAnimator.GetCurrentAnimatorStateInfo(0).IsName(activatorAnimationName) && animationEnd == true)
-        {
-            animator.Play(offToPlay, 0);
-            print("Off");
-        }
+        if(activateByLaser)
+            ActivateByLaser();
     }
 
-    private void ActiveAnimation()
+    private void AnimationDelay()
     {
         if (timer < Time.time)
         {
-            animator.Play(activeToPlay, 0);
-            timer = Time.time + delay;
+            animator.Play(activateAnimationName, 0);
+            timer = Time.time + animationStartDelay;
         }
+    }
+
+    private void ActivateByAnimation()
+    {
+        if (pressurePlate.isActivated && animationStart)
+            Invoke(nameof(AnimationDelay), animationStartDelay);
+
+        if (!pressurePlate.isActivated && animationEnd)
+            animator.Play(closeAnimationName, 0);
+    }
+
+    private void ActivateByLaser()
+    {
+        if (laser.isActivated && animationStart)
+            Invoke(nameof(AnimationDelay), animationStartDelay);
+
+        if (!laser.isActivated && animationEnd)
+            animator.Play(closeAnimationName, 0);
     }
 }

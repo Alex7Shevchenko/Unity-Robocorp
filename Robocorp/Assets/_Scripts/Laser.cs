@@ -12,6 +12,8 @@ public class Laser : MonoBehaviour
     [SerializeField] bool isRed;
     [SerializeField] bool isYellow;
     [SerializeField] bool isGreen;
+    [SerializeField] bool isBlue;
+    [SerializeField] bool isPurple;
     [Space]
     [Tooltip("What layers the raycast will ignore collision with.")]
     [SerializeField] LayerMask ignoreLayers;
@@ -24,6 +26,8 @@ public class Laser : MonoBehaviour
     [SerializeField] Material redMat;
     [SerializeField] Material yellowMat;
     [SerializeField] Material greenMat;
+    [SerializeField] Material blueMat;
+    [SerializeField] Material purpleMat;
 
     [HideInInspector] public bool isActivated;
 
@@ -39,20 +43,42 @@ public class Laser : MonoBehaviour
 
         if (isRed)
         {
+            isYellow = false;
+            isGreen = false;
+            isBlue = false;
+            isPurple = false;
             laser.material = redMat;
             boxTag = "Red Box";
         }
 
         if (isYellow)
         {
+            isGreen = false;
+            isBlue = false;
+            isPurple = false;
             laser.material = yellowMat;
             boxTag = "Yellow Box";
         }
 
         if (isGreen)
         {
+            isBlue = false;
+            isPurple = false;
             laser.material = greenMat;
             boxTag = "Green Box";
+        }
+
+        if (isBlue)
+        {
+            isPurple = false;
+            laser.material = blueMat;
+            boxTag = "Blue Box";
+        }
+
+        if (isPurple)
+        {
+            laser.material = purpleMat;
+            boxTag = "Purple Box";
         }
     }
 
@@ -77,6 +103,8 @@ public class Laser : MonoBehaviour
                     IsActiveBool(isRed);
                     IsActiveBool(isYellow);
                     IsActiveBool(isGreen);
+                    IsActiveBool(isBlue);
+                    IsActiveBool(isPurple);
                     break;
                 }
             }

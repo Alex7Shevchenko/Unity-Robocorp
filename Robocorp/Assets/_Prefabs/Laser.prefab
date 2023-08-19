@@ -123,7 +123,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 376499080071870780}
   m_LocalRotation: {x: 0.5000001, y: 0.49999994, z: 0.49999994, w: 0.5000001}
-  m_LocalPosition: {x: 5, y: 1, z: 15.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -244,6 +244,8 @@ MonoBehaviour:
   isRed: 0
   isYellow: 1
   isGreen: 0
+  isBlue: 0
+  isPurple: 0
   ignoreLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -252,6 +254,8 @@ MonoBehaviour:
   redMat: {fileID: 2100000, guid: e4482d2ee189a7540bb54641bd8d6212, type: 2}
   yellowMat: {fileID: 2100000, guid: ccb09e7291f2a9a4dbdca8dcd1a5d9cd, type: 2}
   greenMat: {fileID: 2100000, guid: fdc35c7ebc880c049a5e512c4805905b, type: 2}
+  blueMat: {fileID: 2100000, guid: 2c28dac8973f2f74abc665e7daa01ef7, type: 2}
+  purpleMat: {fileID: 2100000, guid: acc6a991d9de7db4cb5daf165f6d90f3, type: 2}
   isActivated: 0
 --- !u!1 &376499080790254808
 GameObject:
