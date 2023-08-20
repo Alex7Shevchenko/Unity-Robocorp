@@ -8,9 +8,11 @@ public class RandomizedID : MonoBehaviour
 {
     [SerializeField] TextMeshPro IDToRandomize;
     [SerializeField] int IDLength;
+    [SerializeField] char[] specialCharacters;
 
     [HideInInspector] public int firstIDNumber;
     [HideInInspector] public int lastIDNumber;
+    [HideInInspector] public bool containsSpecialLetters;
 
     private void Awake()
     {
@@ -21,6 +23,10 @@ public class RandomizedID : MonoBehaviour
     {
         firstIDNumber = IDToRandomize.text[0] - 48;
         lastIDNumber = IDToRandomize.text[IDLength - 1] - 48;
+
+        foreach (char character in specialCharacters)
+            if (IDToRandomize.text.Contains(character))
+                containsSpecialLetters = true;        
     }
 
     private string RandomID()

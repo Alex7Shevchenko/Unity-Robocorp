@@ -18,8 +18,6 @@ public class Layout : MonoBehaviour
     private Renderer matColor;
     private bool finishedPuzzle;
 
-    public bool haste, spear, arrow, basic , roger, drink;
-
     private void Awake()
     {
         for (int i = 0; i < pressurePlates.Length; i++)
@@ -41,24 +39,53 @@ public class Layout : MonoBehaviour
 
         if (randomizedBeeper.randomState == 1)
             if (randomizedID.lastIDNumber == 2 || randomizedID.lastIDNumber == 4 || randomizedID.lastIDNumber == 6 || randomizedID.lastIDNumber == 8)
-                print("True");
+                HasteLayout();
+            else if (randomizedID.firstIDNumber == 1)
+                BasicLayout();
             else
-                print("False");
+                SpearLayout();
 
         if (randomizedBeeper.randomState == 2)
-            SpearLayout();
+            if (randomizedID.lastIDNumber > 7)
+                SpearLayout();
+            else if (randomizedID.firstIDNumber < 6)
+                RogerLayout();
+            else
+                DrinkLayout();
 
         if (randomizedBeeper.randomState == 3)
-            ArrowLayout();
+            if (randomizedID.containsSpecialLetters == true && (randomizedID.firstIDNumber == 1 || randomizedID.firstIDNumber == 3 || randomizedID.firstIDNumber == 5 || randomizedID.firstIDNumber == 7 || randomizedID.firstIDNumber == 9))
+                ArrowLayout();
+            else if ((randomizedID.lastIDNumber + randomizedID.firstIDNumber) < 9)
+                HasteLayout();
+            else
+                RogerLayout();
 
         if (randomizedBeeper.randomState == 4)
-            BasicLayout();
+            if ((randomizedID.lastIDNumber * 2) > 11)
+                BasicLayout();
+            else if (randomizedID.containsSpecialLetters == false)
+                SpearLayout();
+            else
+                ArrowLayout();
 
         if (randomizedBeeper.randomState == 5)
-            RogerLayout();
+            if (randomizedID.containsSpecialLetters == true && (randomizedID.lastIDNumber == 2 || randomizedID.lastIDNumber == 4 || randomizedID.lastIDNumber == 6 || randomizedID.lastIDNumber == 8))
+                RogerLayout();
+            else
+                HasteLayout();
 
         if (randomizedBeeper.randomState == 6)
-            DrinkLayout();
+            if (randomizedID.lastIDNumber == 1 || randomizedID.lastIDNumber == 3 || randomizedID.lastIDNumber == 5 || randomizedID.lastIDNumber == 7 || randomizedID.lastIDNumber == 9)
+                DrinkLayout();
+            else if (randomizedID.containsSpecialLetters == true && (randomizedID.firstIDNumber == 1 || randomizedID.firstIDNumber == 3 || randomizedID.firstIDNumber == 5 || randomizedID.firstIDNumber == 7 || randomizedID.firstIDNumber == 9))
+                ArrowLayout();
+            else if ((randomizedID.lastIDNumber + randomizedID.firstIDNumber) < 9)
+                HasteLayout();
+            else
+                RogerLayout();
+
+        LayoutInfo();
     }
 
     private void PuzzleStatus()
@@ -109,5 +136,14 @@ public class Layout : MonoBehaviour
         pressurePlatesScripts[3].desiredObjectTag = D;
         pressurePlatesScripts[4].desiredObjectTag = E;
         this.layoutName = layoutName;
+    }
+
+    private void LayoutInfo()
+    {
+        print("Beeper State: " + randomizedBeeper.randomState);
+        print("First Number: " + randomizedID.firstIDNumber);
+        print("Last Number: " + randomizedID.lastIDNumber);
+        print("Contains Special Letters: " + randomizedID.containsSpecialLetters);
+        print("Layout Name: " + layoutName);
     }
 }
