@@ -24,7 +24,7 @@ public class PlayerHoldDrop : MonoBehaviour
     private float yAxisSpeed, xAxisSpeed, clampedY;
     private bool holdingObject;
     private Vector3 constantHoldingPosition, raycastStartPos;
-    private GameObject currentHoldable;
+    [SerializeField] GameObject currentHoldable;
     private Rigidbody currentHoldableRB;
     private RaycastHit hit;
 
