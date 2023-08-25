@@ -85,7 +85,7 @@ public class Layout : MonoBehaviour
             else
                 RogerLayout();
 
-        LayoutInfo();
+        //LayoutInfo();
     }
 
     private void PuzzleStatus()

@@ -1,6 +1,8 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerHoldDrop : MonoBehaviour
@@ -16,17 +18,21 @@ public class PlayerHoldDrop : MonoBehaviour
     [SerializeField] Vector3 offset;
     [Tooltip("Thing the player can hold")]
     [SerializeField] LayerMask holdableObjects;
+    [SerializeField] LayerMask ignorePlayer;
     [Tooltip("The position the holdable will be when held")]
     [SerializeField] Transform holdingPosition;
     [Tooltip("The camera attached to the player")]
     [SerializeField] GameObject cam;
 
+    private GameObject currentHoldable;
     private float yAxisSpeed, xAxisSpeed, clampedY;
     private bool holdingObject;
     private Vector3 constantHoldingPosition, raycastStartPos;
-    [SerializeField] GameObject currentHoldable;
     private Rigidbody currentHoldableRB;
     private RaycastHit hit;
+    private float[] distances;
+    private float closestHoldableDistance;
+    private int closestHoldable;
 
     private void OnDrawGizmosSelected()
     {
@@ -43,6 +49,7 @@ public class PlayerHoldDrop : MonoBehaviour
         yAxisSpeed = cam.GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed;
         xAxisSpeed = cam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed;
         constantHoldingPosition = holdingPosition.localPosition;
+        ignorePlayer = ~ignorePlayer;
     }
 
     private void Update()
@@ -50,13 +57,22 @@ public class PlayerHoldDrop : MonoBehaviour
         raycastStartPos = new Vector3(transform.position.x, transform.position.y + offset.y + 0.65f, transform.position.z);
         var grabbingArea = Physics.CheckSphere(transform.position + transform.TransformDirection(offset), areaSize, holdableObjects);
         var grabbingCollider = Physics.OverlapSphere(transform.position + transform.TransformDirection(offset), areaSize, holdableObjects);
+        Array.Resize(ref distances, grabbingCollider.Length);
         clampedY = Mathf.Clamp(holdingPosition.localPosition.y, 0, 2.25f);
         holdingPosition.localPosition = new Vector3(holdingPosition.localPosition.x, clampedY, holdingPosition.localPosition.z);
 
         if (grabbingArea)
         {
-            if (currentHoldable == null)
-                currentHoldable = grabbingCollider[0].gameObject;
+            for (int i = 0; i < grabbingCollider.Length; i++)
+            {
+                distances[i] = Vector3.Distance(transform.position, grabbingCollider[i].transform.position);
+                closestHoldableDistance = distances.Min();
+            }
+
+            closestHoldable = Array.IndexOf(distances, closestHoldableDistance);
+
+            if (holdingObject == false)
+                currentHoldable = grabbingCollider[closestHoldable].gameObject;
 
             currentHoldableRB = currentHoldable.GetComponent<Rigidbody>();
         }
@@ -76,7 +92,7 @@ public class PlayerHoldDrop : MonoBehaviour
         {
             var direction = currentHoldable.transform.position - raycastStartPos;
             var ray = new Ray(raycastStartPos, direction);
-            Physics.Raycast(ray, out hit);
+            Physics.Raycast(ray, out hit, 100f, ignorePlayer);
 
             if (holdingObject && grabbingArea && hit.collider.name == currentHoldable.name)
             {

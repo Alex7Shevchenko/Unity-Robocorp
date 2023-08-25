@@ -6,6 +6,7 @@ public class Activator : MonoBehaviour
     [Space]
     [SerializeField] bool activateByPressurePlate;
     [SerializeField] bool activateByLaser;
+    [SerializeField] bool activateByPuzzleComplition;
     [Header("Activator Settings")]
     [Space]
     [SerializeField] GameObject activatorObject;
@@ -47,7 +48,7 @@ public class Activator : MonoBehaviour
         if (activateByPressurePlate)
             ActivateByAnimation();
 
-        if(activateByLaser)
+        if (activateByLaser)
             ActivateByLaser();
     }
 

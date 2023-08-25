@@ -1210,11 +1210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5263bfc051b68419f56fbabb3c75e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMagnitude: 20
-  size: 0.2
-  layer:
-    serializedVersion: 2
-    m_Bits: 256
+  forceMagnitude: 100
 --- !u!114 &9120305868432213164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1227,16 +1223,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c01541a7a77e174abaf0d5fd03d5f1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  areaSize: 1
-  grabPower: 20
+  areaSize: 1.5
+  grabPower: 15
   mouseRotationSpeed: 1
-  offset: {x: 0, y: 1, z: 0.65}
+  offset: {x: 0, y: 1, z: 1.25}
   holdableObjects:
     serializedVersion: 2
     m_Bits: 2304
+  ignorePlayer:
+    serializedVersion: 2
+    m_Bits: 64
   holdingPosition: {fileID: 3319054107771802090}
   cam: {fileID: 0}
-  currentHoldable: {fileID: 0}
 --- !u!1 &4523139366846529165
 GameObject:
   m_ObjectHideFlags: 0

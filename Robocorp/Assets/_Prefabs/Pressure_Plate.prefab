@@ -53,8 +53,10 @@ MonoBehaviour:
   triggerDetectionLayers:
   - Player
   - Magnetable
-  isActivated: 0
   interactables: []
+  animationEnd: 0
+  animationStart: 0
+  isActivated: 0
 --- !u!54 &745094912
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -154,7 +156,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 27aacb661828f7641bd9d83a7f7f7b4d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -264,7 +266,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 8573d531bf839eb49ac92806a4945edf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

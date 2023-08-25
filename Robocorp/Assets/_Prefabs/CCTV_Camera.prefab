@@ -427,6 +427,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6886630516310616944}
+  - component: {fileID: 1967415670539317619}
   m_Layer: 0
   m_Name: Camera_Head
   m_TagString: Untagged
@@ -455,6 +456,19 @@ Transform:
   m_Father: {fileID: 5899969493498133234}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!65 &1967415670539317619
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5800683878357267493}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.19018264, y: 0.15398026, z: 0.38644493}
+  m_Center: {x: 0.0028590297, y: 0.07431257, z: 0.110516205}
 --- !u!1 &6533375411037446216
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,9 +518,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turretHead: {fileID: 5800683878357267493}
   rotationSpeed: 50
+  test: 0
   minRotationDegreeClamp: 0
   maxRotationDegreeClamp: 180
-  test: 0
 --- !u!111 &7144275940315656082
 Animation:
   m_ObjectHideFlags: 0
@@ -534,6 +548,8 @@ GameObject:
   - component: {fileID: 9104484151154221959}
   - component: {fileID: 3158404646611439833}
   - component: {fileID: 7416911035545438498}
+  - component: {fileID: 2406340962619042594}
+  - component: {fileID: 2704812614985337535}
   m_Layer: 0
   m_Name: Holder
   m_TagString: Untagged
@@ -606,6 +622,32 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2406340962619042594
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7695459256012448795}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06915283, y: 0.07057381, z: 0.38380605}
+  m_Center: {x: 0.0019049104, y: -0.00014309585, z: 0.19190302}
+--- !u!65 &2704812614985337535
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7695459256012448795}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06153107, y: 0.21348189, z: 0.061784625}
+  m_Center: {x: 0.0019049849, y: 0.07512184, z: 0.35291374}
 --- !u!1 &8626851872166338027
 GameObject:
   m_ObjectHideFlags: 0

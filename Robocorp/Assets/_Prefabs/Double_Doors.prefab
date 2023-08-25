@@ -563,7 +563,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1753889585572800209
 Transform:
   m_ObjectHideFlags: 0
@@ -744,7 +744,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2652083224249897289
 Transform:
   m_ObjectHideFlags: 0
@@ -1700,6 +1700,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8506127731818625650}
   - component: {fileID: 462619745}
+  - component: {fileID: 3207827460176761121}
   m_Layer: 0
   m_Name: Double_Doors
   m_TagString: Untagged
@@ -1748,6 +1749,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &3207827460176761121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9025221033473712328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aabae82dda7cde448144d3764d30395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateByPressurePlate: 1
+  activateByLaser: 0
+  activatorObject: {fileID: 0}
+  activateAnimationName: Open
+  closeAnimationName: Close
+  animationStartDelay: 0
+  animationEnd: 0
+  animationStart: 0
 --- !u!1 &9210746562866835080
 GameObject:
   m_ObjectHideFlags: 0
