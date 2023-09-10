@@ -1171,7 +1171,7 @@ MonoBehaviour:
   GroundedRadius: 0.28
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 2305
+    m_Bits: 129281
   CinemachineCameraTarget: {fileID: 8338988566280778634}
   TopClamp: 70
   BottomClamp: -30
@@ -1224,15 +1224,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   areaSize: 1.5
-  grabPower: 15
+  grabPower: 10
   mouseRotationSpeed: 1
   offset: {x: 0, y: 1, z: 1.25}
   holdableObjects:
     serializedVersion: 2
-    m_Bits: 2304
+    m_Bits: 129280
   ignorePlayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 68
   holdingPosition: {fileID: 3319054107771802090}
   cam: {fileID: 0}
 --- !u!1 &4523139366846529165

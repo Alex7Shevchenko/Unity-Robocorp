@@ -151,8 +151,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activatorObject: {fileID: 0}
-  activatorAnimationName: 
-  animationToPlay: 
+  boolName: Active_00
+  animationStartDelay: 0
 --- !u!1 &5899777644680522509
 GameObject:
   m_ObjectHideFlags: 0

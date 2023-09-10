@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ButtonPress : MonoBehaviour
 {
+
     [SerializeField] float buttonCooldown = 5f;
     [SerializeField] Vector3 triggerCenterPosition = new Vector3(0,.5f,-.5f);
     [SerializeField] Vector3 triggerZone = new Vector3(.5f,.5f,.8f);
