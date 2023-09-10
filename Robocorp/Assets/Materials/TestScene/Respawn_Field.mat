@@ -102,13 +102,13 @@ Material:
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Edge_Thikness: 0.1
+    - _Edge_Thikness: 0.05
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _Noise_Scale: 45
+    - _Noise_Scale: 100
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
