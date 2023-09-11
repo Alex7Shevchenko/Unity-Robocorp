@@ -89,11 +89,11 @@ public class Activator : MonoBehaviour
         {
             if (playerTrigger.isActivated)
             {
-                animator.SetBool(boolName, false);
+                Invoke(nameof(AnimationDelay), animationStartDelay);
             }
             else
             {
-                Invoke(nameof(AnimationDelay), animationStartDelay);
+                animator.SetBool(boolName, false);
             }
         }
     }

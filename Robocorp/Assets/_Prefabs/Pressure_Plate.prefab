@@ -52,7 +52,11 @@ MonoBehaviour:
   desiredObjectTag: 
   triggerDetectionLayers:
   - Player
-  - Magnetable
+  - Red Box
+  - Yellow Box
+  - Green Box
+  - Blue Box
+  - Purple Box
   interactables: []
   animationEnd: 0
   animationStart: 0

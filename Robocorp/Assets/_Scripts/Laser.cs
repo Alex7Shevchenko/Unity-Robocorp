@@ -29,7 +29,7 @@ public class Laser : MonoBehaviour
     [SerializeField] Material blueMat;
     [SerializeField] Material purpleMat;
 
-    [HideInInspector] public bool isActivated;
+     public bool isActivated;
 
     string boxTag;
     LineRenderer laser;
@@ -98,7 +98,7 @@ public class Laser : MonoBehaviour
                 laser.SetPosition(laser.positionCount - 1, hit.point);
                 remainingLength -= Vector3.Distance(ray.origin, hit.point);
                 ray = new Ray(hit.point, Vector3.Reflect(ray.direction, hit.normal));
-                if (hit.collider.tag != "Mirror")
+                if (hit.collider.tag != "Mirror" || hit.collider == null)
                 {
                     IsActiveBool(isRed);
                     IsActiveBool(isYellow);
