@@ -360,6 +360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activatorObject: {fileID: 0}
   boolName: Active_03
+  counterBoolName: Deactive_03
   animationStartDelay: 0
 --- !u!1 &3182271050930276912
 GameObject:

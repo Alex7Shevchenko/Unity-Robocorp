@@ -78,7 +78,7 @@ public class Activator : MonoBehaviour
             }
             else
             {
-                animator.SetBool(boolName, false);
+                animator.SetBool(boolName, false); ;
             }
         }
     }

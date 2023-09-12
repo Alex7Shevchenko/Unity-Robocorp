@@ -50,6 +50,7 @@ public class DissolveEffect : MonoBehaviour
         }
         else if(isDissolving == false && lerpStatus > -1f)
         {
+            CancelInvoke(nameof(ReturnToNormal));
             gameObject.GetComponent<Collider>().isTrigger = false;
             elapsedTime -= Time.deltaTime;
             Invoke(nameof(ReturnToNormal), desiredDuration);
