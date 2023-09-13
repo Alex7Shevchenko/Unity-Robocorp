@@ -59,10 +59,15 @@ public class Activator : MonoBehaviour
         {
             if (pressurePlate.isActivated)
             {
-                Invoke(nameof(AnimationDelay), animationStartDelay);
+                if (timer < Time.time)
+                {
+                    timer = Time.time + animationStartDelay;
+                    Invoke(nameof(AnimationDelay), animationStartDelay);
+                }
             }
             else
             {
+                CancelInvoke();
                 animator.SetBool(boolName, false);
             }
         }
@@ -74,10 +79,15 @@ public class Activator : MonoBehaviour
         {
             if (laser.isActivated)
             {
-                Invoke(nameof(AnimationDelay), animationStartDelay);
+                if (timer < Time.time)
+                {
+                    timer = Time.time + animationStartDelay;
+                    Invoke(nameof(AnimationDelay), animationStartDelay);
+                }              
             }
             else
             {
+                CancelInvoke();
                 animator.SetBool(boolName, false); ;
             }
         }
@@ -89,10 +99,15 @@ public class Activator : MonoBehaviour
         {
             if (playerTrigger.isActivated)
             {
-                Invoke(nameof(AnimationDelay), animationStartDelay);
+                if (timer < Time.time)
+                {
+                    timer = Time.time + animationStartDelay;
+                    Invoke(nameof(AnimationDelay), animationStartDelay);
+                }
             }
             else
             {
+                CancelInvoke();
                 animator.SetBool(boolName, false);
             }
         }
