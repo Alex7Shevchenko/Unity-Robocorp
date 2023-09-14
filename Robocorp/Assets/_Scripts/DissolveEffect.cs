@@ -40,7 +40,6 @@ public class DissolveEffect : MonoBehaviour
         if (isDissolving)
         {
             staticTexture.SetActive(false);
-            gameObject.GetComponent<Collider>().isTrigger = true;
             dissolveTexture.SetActive(true);
             elapsedTime += Time.deltaTime;
             if (lerpStatus >= 1f) 
@@ -51,7 +50,6 @@ public class DissolveEffect : MonoBehaviour
         else if(isDissolving == false && lerpStatus > -1f)
         {
             CancelInvoke(nameof(ReturnToNormal));
-            gameObject.GetComponent<Collider>().isTrigger = false;
             elapsedTime -= Time.deltaTime;
             Invoke(nameof(ReturnToNormal), desiredDuration);
         }

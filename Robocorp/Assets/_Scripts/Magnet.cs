@@ -5,16 +5,21 @@ using UnityEngine;
 
 public class Magnet : MonoBehaviour
 {
-    [SerializeField] string magnetableLayerName;
     [SerializeField] float force;
+    [SerializeField] string[] magnetableLayerNames = new string[0];
+    [SerializeField] LayerMask[] magnetableLayers = new LayerMask[0];
 
     [SerializeField][HideInInspector] List<GameObject> magnetables;
-    LayerMask magnetableLayer;
+
     bool magnetActive;
 
     private void Awake()
     {
-        magnetableLayer = LayerMask.NameToLayer(magnetableLayerName);
+        for (int i = 0; i < magnetableLayerNames.Length; ++i)
+        {
+            magnetableLayers[i] = LayerMask.NameToLayer(magnetableLayerNames[i]);
+        }
+       
     }
 
     private void Update()
@@ -37,25 +42,37 @@ public class Magnet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == magnetableLayer)
-            magnetables.Add(other.gameObject);
+        for(int i = 0; i < magnetableLayers.Length; ++i)
+        {
+            if (other.gameObject.layer == magnetableLayers[i])
+                magnetables.Add(other.gameObject);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == magnetableLayer)
-            magnetables.Remove(other.gameObject);
+        for (int i = 0; i < magnetableLayers.Length; ++i)
+        {
+            if (other.gameObject.layer == magnetableLayers[i])
+                magnetables.Remove(other.gameObject);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == magnetableLayer)
-            collision.transform.parent = transform;
+        for (int i = 0; i < magnetableLayers.Length; ++i)
+        {
+            if (collision.gameObject.layer == magnetableLayers[i])
+                collision.transform.parent = transform;
+        }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.layer == magnetableLayer)
-            collision.transform.parent = null;
+        for (int i = 0; i < magnetableLayers.Length; ++i)
+        {
+            if (collision.gameObject.layer == magnetableLayers[i])
+                collision.transform.parent = null;
+        }
     }
 }

@@ -58,8 +58,8 @@ public class Targeting : MonoBehaviour
 
             targetRotation = Quaternion.Euler(eulerRotation);
 
-            float step = rotationSpeed * Time.deltaTime;
-            turretHead.transform.rotation = Quaternion.RotateTowards(turretHead.transform.rotation, targetRotation, step);
+            float fixedSpeed = rotationSpeed * Time.deltaTime;
+            turretHead.transform.rotation = Quaternion.RotateTowards(turretHead.transform.rotation, targetRotation, fixedSpeed);
         }
     }
 

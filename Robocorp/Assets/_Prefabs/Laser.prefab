@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 376499080071870754}
   - component: {fileID: 376499080071870781}
   - component: {fileID: 376499080071870755}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 376499080071870780}
-  m_LocalRotation: {x: 0.5000001, y: 0.49999994, z: 0.49999994, w: 0.5000001}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -151,7 +151,7 @@ MonoBehaviour:
   isPurple: 0
   ignoreLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 131136
   maxReflections: 10
   maxLength: 100
   redMat: {fileID: 2100000, guid: e4482d2ee189a7540bb54641bd8d6212, type: 2}

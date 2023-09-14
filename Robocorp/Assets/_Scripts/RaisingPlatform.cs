@@ -64,7 +64,15 @@ public class RaisingPlatform : MonoBehaviour
             }
             float normilizedDistance = Mathf.InverseLerp(outerRadius, innerRadius, closestObject);
 
-            platform.GetComponent<Collider>().enabled = true;
+            if (normilizedDistance > 0.5f)
+            {
+                platform.GetComponent<Collider>().enabled = true;
+            }
+            else
+            {
+                platform.GetComponent<Collider>().enabled = false;
+            }
+
             platform.transform.position = Vector3.Lerp(startPos, endPos, normilizedDistance);
             platformMesh.GetComponent<Renderer>().material.color = Color.Lerp(startingMat.color, desiredMat.color, normilizedDistance);
             platformMesh.GetComponent<Animator>().enabled = true;

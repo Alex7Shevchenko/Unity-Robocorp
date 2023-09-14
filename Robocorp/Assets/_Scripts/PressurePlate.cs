@@ -35,8 +35,7 @@ public class PressurePlate : MonoBehaviour
 
     private void Update()
     {
-        // TEST TEST TEST TEST TEST TEST //
-/*        if (desiredObjectTag == "Red Box")
+        if (desiredObjectTag == "Red Box")
             material.color = Color.red;
         if (desiredObjectTag == "Yellow Box")
             material.color = Color.yellow;
@@ -45,8 +44,7 @@ public class PressurePlate : MonoBehaviour
         if (desiredObjectTag == "Blue Box")
             material.color = Color.blue;
         if (desiredObjectTag == "Purple Box")
-            material.color = Color.black;*/
-        // TEST TEST TEST TEST TEST TEST //
+            material.color = new Color32(121, 0, 255, 255);
 
         if (interactables.Count == 0 && animationEnd == true)
         {

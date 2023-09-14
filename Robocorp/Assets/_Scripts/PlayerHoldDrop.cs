@@ -19,6 +19,7 @@ public class PlayerHoldDrop : MonoBehaviour
     [Tooltip("Thing the player can hold")]
     [SerializeField] LayerMask holdableObjects;
     [SerializeField] LayerMask ignorePlayer;
+    [SerializeField] LayerMask ignoreStuff;
     [Tooltip("The position the holdable will be when held")]
     [SerializeField] Transform holdingPosition;
     [Tooltip("The camera attached to the player")]
@@ -33,6 +34,8 @@ public class PlayerHoldDrop : MonoBehaviour
     private float[] distances;
     private float closestHoldableDistance;
     private int closestHoldable;
+
+    public float speed;
 
     private void OnDrawGizmosSelected()
     {
@@ -50,6 +53,7 @@ public class PlayerHoldDrop : MonoBehaviour
         xAxisSpeed = cam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed;
         constantHoldingPosition = holdingPosition.localPosition;
         ignorePlayer = ~ignorePlayer;
+        ignoreStuff = ~ignoreStuff;
     }
 
     private void Update()
@@ -101,7 +105,7 @@ public class PlayerHoldDrop : MonoBehaviour
                 currentHoldableRB.velocity = position;
 
                 if (Input.GetKey(KeyCode.Mouse0))
-                    mouseRotation();
+                    StartRotating();
                 else if (Input.GetKey(KeyCode.Mouse1))
                     mouseUpDown();
                 else
@@ -122,12 +126,12 @@ public class PlayerHoldDrop : MonoBehaviour
 
     private void mouseRotation()
     {
-        float XaxisRotation = Input.GetAxis("Mouse X") * mouseRotationSpeed;
+/*        float XaxisRotation = Input.GetAxis("Mouse X") * mouseRotationSpeed;
         float YaxisRotation = Input.GetAxis("Mouse Y") * mouseRotationSpeed;
         currentHoldable.transform.Rotate(transform.up, XaxisRotation, Space.World);
         currentHoldable.transform.Rotate(transform.right, YaxisRotation, Space.World);
         cam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = 0f;
-        cam.GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = 0f;
+        cam.GetComponent<CinemachineFreeLook>().m_YAxis.m_MaxSpeed = 0f;*/
     }
 
     private void mouseUpDown()
@@ -147,5 +151,18 @@ public class PlayerHoldDrop : MonoBehaviour
     private void FreeUpDown()
     {
         holdingPosition.localPosition = constantHoldingPosition;
+    }
+
+    void StartRotating()
+    {
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 1000f, ignoreStuff))
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(hit.point - currentHoldable.transform.position);
+
+            float step = speed * Time.deltaTime;
+            currentHoldable.transform.rotation = Quaternion.RotateTowards(currentHoldable.transform.rotation, lookRotation, step);
+        }
     }
 }
