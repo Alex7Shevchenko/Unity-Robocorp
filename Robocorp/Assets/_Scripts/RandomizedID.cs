@@ -6,27 +6,24 @@ using UnityEngine.UIElements;
 
 public class RandomizedID : MonoBehaviour
 {
-    [SerializeField] TextMeshPro IDToRandomize;
+    [SerializeField] TMP_Text IDToRandomize;
     [SerializeField] int IDLength;
-    [SerializeField] char[] specialCharacters;
+    [SerializeField] char[] specialCharacters = new char[7];
 
-    [HideInInspector] public int firstIDNumber;
-    [HideInInspector] public int lastIDNumber;
-    [HideInInspector] public bool containsSpecialLetters;
+     public int firstIDNumber;
+     public int lastIDNumber;
+     public bool containsSpecialLetters;
 
     private void Awake()
     {
         IDToRandomize.text = RandomID();
-    }
 
-    private void Start()
-    {
         firstIDNumber = IDToRandomize.text[0] - 48;
         lastIDNumber = IDToRandomize.text[IDLength - 1] - 48;
 
         foreach (char character in specialCharacters)
             if (IDToRandomize.text.Contains(character))
-                containsSpecialLetters = true;        
+                containsSpecialLetters = true;
     }
 
     private string RandomID()

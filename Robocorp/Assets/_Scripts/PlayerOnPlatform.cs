@@ -6,7 +6,7 @@ public class PlayerOnPlatform : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject)
+        if (other.gameObject.layer != 2)
         {
             other.transform.parent = transform;
         }
@@ -14,7 +14,7 @@ public class PlayerOnPlatform : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject)
+        if (other.gameObject.layer != 2)
         {
             other.transform.parent = null;
         }

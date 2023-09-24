@@ -9,11 +9,11 @@ public class Laser : MonoBehaviour
     [Header("Laser Settings")]
     [Header("Choose the type of laser.\nThe type of the laser will dictate what box it will detect.")]
     [Space]
-    [SerializeField] bool isRed;
-    [SerializeField] bool isYellow;
-    [SerializeField] bool isGreen;
-    [SerializeField] bool isBlue;
-    [SerializeField] bool isPurple;
+    public bool isRed;
+    public bool isYellow;
+    public bool isGreen;
+    public bool isBlue;
+    public bool isPurple;
     [Space]
     [Tooltip("What layers the raycast will ignore collision with.")]
     [SerializeField] LayerMask ignoreLayers;
@@ -36,12 +36,14 @@ public class Laser : MonoBehaviour
     Ray ray;
     RaycastHit hit;
 
-    private void Awake()
+    private void Start()
     {
         laser = GetComponent<LineRenderer>();
         ignoreLayers = ~ignoreLayers;
 
-        if (isRed)
+        Invoke(nameof(LaserColorSetter), 0.1f);
+
+/*        if (isRed)
         {
             isYellow = false;
             isGreen = false;
@@ -79,7 +81,7 @@ public class Laser : MonoBehaviour
         {
             laser.material = purpleMat;
             boxTag = "Purple Box";
-        }
+        }*/
     }
 
     private void Update()
@@ -127,5 +129,58 @@ public class Laser : MonoBehaviour
             {
                 isActivated = false;
             }
+    }
+
+    private void LaserColorSetter()
+    {
+        if (isRed)
+        {
+            isYellow = false;
+            isGreen = false;
+            isBlue = false;
+            isPurple = false;
+            laser.material = redMat;
+            boxTag = "Red Box";
+        }
+
+        if (isYellow)
+        {
+            isGreen = false;
+            isBlue = false;
+            isPurple = false;
+            isRed = false;
+            laser.material = yellowMat;
+            boxTag = "Yellow Box";
+        }
+
+        if (isGreen)
+        {
+            isRed = false;
+            isYellow = false;
+            isBlue = false;
+            isPurple = false;
+            laser.material = greenMat;
+            boxTag = "Green Box";
+        }
+
+        if (isBlue)
+        {
+            isRed = false;
+            isYellow = false;
+            isGreen = false;
+            isPurple = false;
+            laser.material = blueMat;
+            boxTag = "Blue Box";
+        }
+
+        if (isPurple)
+        {
+            isRed = false;
+            isYellow = false;
+            isGreen = false;
+            isBlue = false;
+            laser.material = purpleMat;
+            boxTag = "Purple Box";
+        }
     }
 }

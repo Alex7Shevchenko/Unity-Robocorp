@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class RandomizedBeeper : MonoBehaviour
 {
-    [HideInInspector] public int randomState;
+    public int randomState;
 
-    private Animator animator;
+    [SerializeField] Animator animator;
 
     private void Awake()
     {
-        animator = gameObject.GetComponent<Animator>();
-        randomState = Random.Range(1, 6);
+        randomState = Random.Range(1, 7);
     }
 
     private void Update()
@@ -26,7 +25,7 @@ public class RandomizedBeeper : MonoBehaviour
             animator.Play("Color_Beep_D", 0);
         else if (randomState == 5)
             animator.Play("Color_Beep_E", 0);
-        else
+        else if (randomState == 6)
             animator.Play("Color_Beep_F", 0);
     }
 }

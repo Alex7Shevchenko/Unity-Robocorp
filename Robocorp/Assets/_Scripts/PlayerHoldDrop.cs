@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerHoldDrop : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class PlayerHoldDrop : MonoBehaviour
     [SerializeField] Transform holdingPosition;
     [Tooltip("The camera attached to the player")]
     [SerializeField] GameObject cam;
+    [SerializeField] GameObject holdButtonPrompt;
 
     private GameObject currentHoldable;
     private float yAxisSpeed, xAxisSpeed, clampedY;
@@ -76,12 +78,22 @@ public class PlayerHoldDrop : MonoBehaviour
             closestHoldable = Array.IndexOf(distances, closestHoldableDistance);
 
             if (holdingObject == false)
+            {
                 currentHoldable = grabbingCollider[closestHoldable].gameObject;
+                holdButtonPrompt.SetActive(true);
+                holdButtonPrompt.transform.position = currentHoldable.transform.position + new Vector3(0, 1, 0);
+                holdButtonPrompt.transform.LookAt(cam.transform.position);
+            }
+            else
+            {
+                holdButtonPrompt.SetActive(false);
+            }
 
             currentHoldableRB = currentHoldable.GetComponent<Rigidbody>();
         }
         else
         {
+            holdButtonPrompt.SetActive(false);
             currentHoldable = null;
             currentHoldableRB = null;
         }

@@ -16,6 +16,9 @@ TagManager:
   - Plate
   - Blue Box
   - Purple Box
+  - Blue Core
+  - Green Core
+  - Red Core
   layers:
   - Default
   - TransparentFX
@@ -35,11 +38,11 @@ TagManager:
   - Purple Box
   - Blue Box
   - Respawner
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Mirror
+  - ButtonDown
+  - ButtonUp
+  - Number
+  - Enter
   - 
   - 
   - 

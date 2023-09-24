@@ -8,7 +8,7 @@ public class Magnet : MonoBehaviour
     [SerializeField] float force;
     [SerializeField] string[] magnetableLayerNames = new string[0];
     [SerializeField] LayerMask[] magnetableLayers = new LayerMask[0];
-
+    [SerializeField] CraneMovement craneMovement;
     [SerializeField][HideInInspector] List<GameObject> magnetables;
 
     bool magnetActive;
@@ -19,13 +19,14 @@ public class Magnet : MonoBehaviour
         {
             magnetableLayers[i] = LayerMask.NameToLayer(magnetableLayerNames[i]);
         }
-       
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && craneMovement.isCraneActive)
+        {
             magnetActive = !magnetActive;
+        }
     }
 
     private void FixedUpdate()
