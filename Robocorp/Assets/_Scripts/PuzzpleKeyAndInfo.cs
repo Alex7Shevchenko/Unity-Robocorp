@@ -5,7 +5,6 @@ using System.Linq;
 using TMPro;
 using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
-using UnityEditor.Search;
 using UnityEngine;
 
 public class PuzzpleKeyAndInfo : MonoBehaviour

@@ -4,6 +4,7 @@ using UnityEngine;
 public class PhysicalPlayer : MonoBehaviour
 {
     [SerializeField] float forceMagnitude = 1.5f;
+    public bool playerInUI;
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {

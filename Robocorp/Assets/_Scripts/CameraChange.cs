@@ -22,6 +22,7 @@ public class CameraChange : MonoBehaviour
     [SerializeField] Transform newPos;
     [SerializeField] Transform defaultPos;
 
+    PhysicalPlayer physicalPlayer;
     public float timer;
     public bool isPressed;
     bool inRange;
@@ -29,18 +30,25 @@ public class CameraChange : MonoBehaviour
 
     private void Start()
     {
+        physicalPlayer = player.GetComponent<PhysicalPlayer>();
         indexMax = texts.Length - 1;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        inRange = true;
+        if(other.gameObject.tag == player.tag)
+        {
+            inRange = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        inRange = false;
-        isPressed = false;
+        if (other.gameObject.tag == player.tag)
+        {
+            inRange = false;
+            isPressed = false;
+        }
     }
 
     private void Update()
@@ -52,13 +60,22 @@ public class CameraChange : MonoBehaviour
     {
         if(inRange)
         {
-            interactButtonPrompt.SetActive(true);
+            if(!isPressed)
+            {
+                interactButtonPrompt.SetActive(true);
+            }
+            else
+            {
+                interactButtonPrompt.SetActive(false);
+            }
+
             interactButtonPrompt.transform.position = transform.position + offset;
             interactButtonPrompt.transform.LookAt(mainCamVirtualCamera.transform.position);
 
             if(Input.GetKeyDown(KeyCode.E))
             {
                 isPressed = !isPressed;
+                physicalPlayer.playerInUI = !physicalPlayer.playerInUI;
             }
         }
         else
@@ -67,7 +84,7 @@ public class CameraChange : MonoBehaviour
             interactButtonPrompt.SetActive(false);
         }
 
-        if (isPressed)
+        if (isPressed && physicalPlayer.playerInUI)
         {
             cinemachineBrain.Priority = 11;
             player.GetComponent<PlayerHoldDrop>().enabled = false;
@@ -83,7 +100,8 @@ public class CameraChange : MonoBehaviour
             {
                 crane.GetComponent<CraneMovement>().isCraneActive = true;
             }
-            else if (mouseControl)
+
+            if (mouseControl)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
@@ -139,7 +157,7 @@ public class CameraChange : MonoBehaviour
             {
                 crane.GetComponent<CraneMovement>().isCraneActive = false;
             }
-            else if (mouseControl)
+            else if (mouseControl && physicalPlayer.playerInUI == false)
             {
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;

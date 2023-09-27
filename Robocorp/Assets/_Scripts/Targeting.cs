@@ -25,7 +25,7 @@ public class Targeting : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.Find("PlayerArmature/PlayerCameraRoot");
+        player = GameObject.Find("PlayerRobot/PlayerCameraRoot");
     }
 
     private void Update()

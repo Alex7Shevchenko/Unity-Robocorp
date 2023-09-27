@@ -7,13 +7,17 @@ public class Activator : MonoBehaviour
     [SerializeField] GameObject activatorObject;
     [SerializeField] string boolName;
     [SerializeField] float animationStartDelay;
+    [SerializeField] Laser[] lasers = new Laser[0];
+
+    public bool activateByMultyLasers;
 
     private Animator animator;
     private float timer;
     private Laser laser;
     private PressurePlate pressurePlate;
     private PlayerTrigger playerTrigger;
-    bool activateByLaser, activateByPlate, activeByTrigger;
+    private Keypad keypad;
+    bool activateByLaser, activateByPlate, activeByTrigger, activateByCode;
 
     private void Awake()
     {
@@ -22,22 +26,31 @@ public class Activator : MonoBehaviour
 
     private void Start()
     {
-        if (activatorObject.GetComponent<PressurePlate>() != null)
+        if(activatorObject != null)
         {
-            pressurePlate = activatorObject.GetComponent<PressurePlate>();
-            activateByPlate = true;
-        }
+            if (activatorObject.GetComponent<PressurePlate>() != null)
+            {
+                pressurePlate = activatorObject.GetComponent<PressurePlate>();
+                activateByPlate = true;
+            }
 
-        if (activatorObject.GetComponent<Laser>() != null)
-        {
-            laser = activatorObject.GetComponent<Laser>();
-            activateByLaser = true;
-        }
+            if (activatorObject.GetComponent<Laser>() != null)
+            {
+                laser = activatorObject.GetComponent<Laser>();
+                activateByLaser = true;
+            }
 
-        if (activatorObject.GetComponent<PlayerTrigger>() != null)
-        {
-            playerTrigger = activatorObject.GetComponent<PlayerTrigger>();
-            activeByTrigger = true;
+            if (activatorObject.GetComponent<PlayerTrigger>() != null)
+            {
+                playerTrigger = activatorObject.GetComponent<PlayerTrigger>();
+                activeByTrigger = true;
+            }
+
+            if (activatorObject.GetComponent<Keypad>() != null)
+            {
+                keypad = activatorObject.GetComponent<Keypad>();
+                activateByCode = true;
+            }
         }
     }
 
@@ -46,6 +59,8 @@ public class Activator : MonoBehaviour
         ActivateByPlate();
         ActivateByLaser();
         ActivateByTrigger();
+        ActivateByCode();
+        ActivateBeMultipleLasers();
     }
 
     private void AnimationDelay()
@@ -111,5 +126,58 @@ public class Activator : MonoBehaviour
                 animator.SetBool(boolName, false);
             }
         }
+    }
+
+    private void ActivateByCode()
+    {
+        if (activateByCode)
+        {
+            if (keypad.isActivated)
+            {
+                if (timer < Time.time)
+                {
+                    timer = Time.time + animationStartDelay;
+                    Invoke(nameof(AnimationDelay), animationStartDelay);
+                }
+            }
+            else
+            {
+                CancelInvoke();
+                animator.SetBool(boolName, false);
+            }
+        }
+    }
+
+    private void ActivateBeMultipleLasers()
+    {
+        if (activateByMultyLasers)
+        {
+            if(LasersList() == true)
+            {
+                if (timer < Time.time)
+                {
+                    timer = Time.time + animationStartDelay;
+                    Invoke(nameof(AnimationDelay), animationStartDelay);
+                }
+            }
+            else
+            {
+                CancelInvoke();
+                animator.SetBool(boolName, false);
+            }
+        }
+    }
+
+    bool LasersList()
+    {
+        foreach (var laser in lasers)
+        {
+            if(laser.isActivated == false)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
