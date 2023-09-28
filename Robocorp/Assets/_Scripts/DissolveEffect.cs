@@ -9,8 +9,8 @@ public class DissolveEffect : MonoBehaviour
     [SerializeField] GameObject staticTexture, dissolveTexture;
     public float desiredDuration;
 
-    private float lerpStatus;
-    private float elapsedTime;
+    public float lerpStatus;
+    public float elapsedTime;
 
     [HideInInspector] public bool isDissolving;
 
@@ -51,7 +51,7 @@ public class DissolveEffect : MonoBehaviour
         {
             CancelInvoke(nameof(ReturnToNormal));
             elapsedTime -= Time.deltaTime;
-            Invoke(nameof(ReturnToNormal), desiredDuration);
+            Invoke(nameof(ReturnToNormal), desiredDuration - 0.95f);
         }
 
         float precentageComplete = elapsedTime / desiredDuration;

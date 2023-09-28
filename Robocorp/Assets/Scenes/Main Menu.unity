@@ -4576,6 +4576,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcf5410e8301bab479c58a9bf51cbd28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseMenuOption: 0
+  pauseMenu: {fileID: 0}
+  player: {fileID: 0}
+  mainCamera: []
+  mainCamera2: {fileID: 0}
+  pauseMenuActive: 0
 --- !u!4 &229581956
 Transform:
   m_ObjectHideFlags: 0
@@ -10096,7 +10102,7 @@ PrefabInstance:
     - target: {fileID: 2217515575326679273, guid: 6475a1e84b5c5b34785a45cbe645168b,
         type: 3}
       propertyPath: delaySeconds
-      value: 18
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2217515575326679273, guid: 6475a1e84b5c5b34785a45cbe645168b,
         type: 3}
@@ -14951,7 +14957,7 @@ PrefabInstance:
     - target: {fileID: 2217515575326679273, guid: 6475a1e84b5c5b34785a45cbe645168b,
         type: 3}
       propertyPath: delaySeconds
-      value: 12
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 2217515575326679273, guid: 6475a1e84b5c5b34785a45cbe645168b,
         type: 3}
@@ -16079,7 +16085,7 @@ PrefabInstance:
     - target: {fileID: 2217515575326679273, guid: 6475a1e84b5c5b34785a45cbe645168b,
         type: 3}
       propertyPath: delaySeconds
-      value: 9
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 2217515575326679273, guid: 6475a1e84b5c5b34785a45cbe645168b,
         type: 3}
@@ -20082,7 +20088,7 @@ PrefabInstance:
     - target: {fileID: 2217515575326679273, guid: 6475a1e84b5c5b34785a45cbe645168b,
         type: 3}
       propertyPath: delaySeconds
-      value: 6
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2217515575326679273, guid: 6475a1e84b5c5b34785a45cbe645168b,
         type: 3}
@@ -23199,7 +23205,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -31256,7 +31262,7 @@ PrefabInstance:
     - target: {fileID: 2217515575326679273, guid: 6475a1e84b5c5b34785a45cbe645168b,
         type: 3}
       propertyPath: delaySeconds
-      value: 21
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2217515575326679273, guid: 6475a1e84b5c5b34785a45cbe645168b,
         type: 3}
@@ -34881,7 +34887,7 @@ PrefabInstance:
     - target: {fileID: 2217515575326679273, guid: 6475a1e84b5c5b34785a45cbe645168b,
         type: 3}
       propertyPath: delaySeconds
-      value: 15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2217515575326679273, guid: 6475a1e84b5c5b34785a45cbe645168b,
         type: 3}
@@ -38681,7 +38687,7 @@ PrefabInstance:
     - target: {fileID: 2217515575326679273, guid: 6475a1e84b5c5b34785a45cbe645168b,
         type: 3}
       propertyPath: delaySeconds
-      value: 3
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2217515575326679273, guid: 6475a1e84b5c5b34785a45cbe645168b,
         type: 3}
@@ -39543,6 +39549,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217515575326679273, guid: 6475a1e84b5c5b34785a45cbe645168b,
+        type: 3}
+      propertyPath: delaySeconds
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2217515575326679273, guid: 6475a1e84b5c5b34785a45cbe645168b,
         type: 3}

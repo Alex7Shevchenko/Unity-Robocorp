@@ -7,9 +7,11 @@ using System;
 
 public class CameraChange : MonoBehaviour
 {
+    [SerializeField] Manager manager;
     [SerializeField] GameObject mainCamVirtualCamera;
     [SerializeField] GameObject player;
     [SerializeField] CinemachineVirtualCamera cinemachineBrain;
+    [SerializeField] GameObject magnetButtons;
     [SerializeField] GameObject interactButtonPrompt;
     [SerializeField] Vector3 offset;
     [Space]
@@ -98,6 +100,7 @@ public class CameraChange : MonoBehaviour
 
             if (craneControl)
             {
+                magnetButtons.SetActive(true);
                 crane.GetComponent<CraneMovement>().isCraneActive = true;
             }
 
@@ -155,9 +158,10 @@ public class CameraChange : MonoBehaviour
 
             if (craneControl)
             {
+                magnetButtons.SetActive(false);
                 crane.GetComponent<CraneMovement>().isCraneActive = false;
             }
-            else if (mouseControl && physicalPlayer.playerInUI == false)
+            else if (mouseControl && physicalPlayer.playerInUI == false && !manager.pauseMenuActive)
             {
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
