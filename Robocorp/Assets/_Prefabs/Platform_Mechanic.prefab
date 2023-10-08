@@ -361,6 +361,8 @@ MonoBehaviour:
   activatorObject: {fileID: 0}
   boolName: Active_05
   animationStartDelay: 0
+  lasers: []
+  activateByMultyLasers: 0
 --- !u!1 &3182271050930276912
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,7 +725,7 @@ GameObject:
   - component: {fileID: 6666748031232898313}
   - component: {fileID: 4452658201467369956}
   - component: {fileID: 5817892498297005994}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}

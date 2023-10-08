@@ -72,7 +72,8 @@ public class ResetPuzzle : MonoBehaviour
             {
                 objects[i].GetComponent<DissolveEffect>().isDissolving = true;
             }
-
+            
+            gameObject.GetComponent<Animator>().Play("Pull_Lever", 0);
             timer = 0f;
             Invoke(nameof(ResetPositions), 1);
         }

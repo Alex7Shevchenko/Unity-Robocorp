@@ -19,6 +19,8 @@ public class Keypad : MonoBehaviour
     public bool isActivated;
     private int codeLength;
 
+    float timer;
+
     private void Start()
     {
         Invoke(nameof(SetCode), 0.1f);
@@ -26,6 +28,24 @@ public class Keypad : MonoBehaviour
 
     void Update()
     {
+        timer += Time.deltaTime;
+
+        if (!screenCode.text.Contains(code) && screenCode.text.Length == codeLength && timer > 1)
+        {
+            screenCode.text = string.Empty;
+            screenCode.enabled = false;
+            screenCodeRemoved.enabled = false;
+            errorMessage.enabled = true;
+            Invoke(nameof(SetDefaults), messageDisplayTimeSeconds);
+        }
+        else if (screenCode.text.Contains(code) && screenCode.text.Length == codeLength && timer > 1)
+        {
+            screenCode.enabled = false;
+            screenCodeRemoved.enabled = false;
+            accessMesage.enabled = true;
+            isActivated = true;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -43,20 +63,6 @@ public class Keypad : MonoBehaviour
                 if (screenCode.text.Length < codeLength && hit.collider.gameObject.layer == 21)
                 {
                     screenCode.text += hit.collider.gameObject.name;
-                }
-                else if (!screenCode.text.Contains(code) && hit.collider.gameObject.layer == 22)
-                {
-                    screenCode.enabled = false;
-                    screenCodeRemoved.enabled = false;
-                    errorMessage.enabled = true;
-                    Invoke(nameof(SetDefaults), messageDisplayTimeSeconds);
-                }
-                else if (screenCode.text.Contains(code) && hit.collider.gameObject.layer == 22)
-                {
-                    screenCode.enabled = false;
-                    screenCodeRemoved.enabled = false;
-                    accessMesage.enabled = true;
-                    isActivated = true;
                 }
             }
         }
@@ -93,8 +99,7 @@ public class Keypad : MonoBehaviour
     {
         screenCode.enabled = true;
         screenCodeRemoved.enabled = true;
-        errorMessage.enabled = false;
-        screenCode.text = string.Empty;
+        errorMessage.enabled = false;       
     }
 
     IEnumerator ResetMaterial(Material material)
